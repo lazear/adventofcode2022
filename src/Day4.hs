@@ -19,12 +19,10 @@ toSections :: String -> [Int]
 toSections = map read . split (not . Char.isDigit)
 
 overlap :: (Bool -> Bool -> Bool) -> [Int] -> Bool
-overlap op [a, b, c, d] = overlap' (a, b) (c, d)
-    where
-        overlap' (a, b) (c, d) 
-            | (a >= c && a <= d) `op` (b >= c && b <= d) = True
-            | (c >= a && c <= b) `op` (d >= a && d <= b) = True
-            | otherwise = False
+overlap op [a, b, c, d]
+    | (a >= c && a <= d) `op` (b >= c && b <= d) = True
+    | (c >= a && c <= b) `op` (d >= a && d <= b) = True
+    | otherwise = False
 overlap _ _ = False
 
 part1 :: [String] -> Int
